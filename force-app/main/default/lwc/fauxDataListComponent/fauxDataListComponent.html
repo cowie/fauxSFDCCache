@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-card  slds-card_boundary">
+        <div class="slds-page-header forceRelatedListCardHeader">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media slds-media--center slds-has-flexi-truncate">
+                        <div class="slds-media__figure slds-avatar slds-avatar_small">
+                            <lightning-icon icon-name="custom:custom64" title="custom64"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-card__header-title slds-truncate slds-m-right--xx-small slds-shrink-none">
+                                    <a class="slds-card__header-link baseCard__header-title-container" href="#">
+                                        <span
+                                            class="slds-card__header-title slds-truncate slds-m-right--xx-small slds-shrink-none"
+                                            title={tableTitle}
+                                            >{tableTitle}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <lightning-datatable
+                data={fauxRecords.data} columns={fauxColumns} key-field="ItemNumber" hide-checkbox-column>
+            </lightning-datatable>
+        </div>
+    </div>
+</template>

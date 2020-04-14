@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PlatformCachePartition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This is a simple partition to store temporary loads of requested user data from a remote faux &#39;product system&#39; endpoint.</description>
+    <isDefaultPartition>true</isDefaultPartition>
+    <masterLabel>ProductUserData</masterLabel>
+    <platformCachePartitionTypes>
+        <allocatedCapacity>1</allocatedCapacity>
+        <allocatedPurchasedCapacity>0</allocatedPurchasedCapacity>
+        <allocatedTrialCapacity>0</allocatedTrialCapacity>
+        <cacheType>Organization</cacheType>
+    </platformCachePartitionTypes>
+    <platformCachePartitionTypes>
+        <allocatedCapacity>0</allocatedCapacity>
+        <allocatedPurchasedCapacity>0</allocatedPurchasedCapacity>
+        <allocatedTrialCapacity>0</allocatedTrialCapacity>
+        <cacheType>Session</cacheType>
+    </platformCachePartitionTypes>
+</PlatformCachePartition>

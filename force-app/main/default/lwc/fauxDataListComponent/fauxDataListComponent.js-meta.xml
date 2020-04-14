@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>FauxRecordRelatedList</masterLabel>
+    <description>Fetch me some fake records bud</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="tableTitle" default="Faux Records" label="Table Title"  type="string"></property>
+            <property name="adminItemNoLabel" default="Item Number" label="Item No. Label"  type="string"></property>
+            <property name="adminIntegerLabel" default="Items Ordered" label="Integer Value Label"  type="string"></property>
+            <property name="adminDollarLabel" default="Total Price" label="Dollar Value Label"  type="string"></property>
+            <property name="adminDateTimeLabel" default="Received Date" label="Date Value Label" type="string"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
