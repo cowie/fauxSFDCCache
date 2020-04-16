@@ -10,17 +10,16 @@ public with sharing class fauxComponentController {
 
     @AuraEnabled(cacheable=true)
     public static List<fauxRecord> getFauxData(string targetRecordID){
-        //check cache for targetRecordID
         /*
-        kv should look like
-        key: recordID (15-18digit sf id)
-        value: [
-            {
-                integerValue:,
-                dollarValue:,
-                dateValue,
-            }, ...
-        ]
+            kv should look like
+            key: recordID (15-18digit sf id)
+            value: [
+                {
+                    integerValue:,
+                    dollarValue:,
+                    dateValue,
+                }, ...
+            ]
         */
         long startTime = system.currentTimeMillis();
         if(!Cache.Org.contains(targetRecordID)){
@@ -32,15 +31,17 @@ public with sharing class fauxComponentController {
             Http h = new Http();
             HttpResponse resp = h.send(req);
             List<fauxRecord> fr = new List<fauxRecord>();
-            system.debug(resp.getBody());
+            
             fr = (List<fauxRecord>)JSON.deserializeStrict(resp.getBody(), List<fauxRecord>.class);
-            system.debug(fr);
+            
             //push content into cache
             Cache.Org.put(targetRecordID, fr);
+            
             system.debug('added to org cache');
             system.debug('time to do full fetch');
             long elapsedTime = System.currentTimeMillis() - startTime;
             system.debug(elapsedTime);
+
             return fr;
         }else{
             //good, return
@@ -49,9 +50,37 @@ public with sharing class fauxComponentController {
             system.debug('time to do cache fetch');
             long elapsedTime = System.currentTimeMillis() - startTime;
             system.debug(elapsedTime);
+
             return (List<FauxRecord>)Cache.Org.get(targetRecordID);
         }
-        //if good, return
-        //if not, make callout
+    }
+
+    @AuraEnabled
+    public static List<fauxRecord> refreshFauxData(string targetRecordID){
+        /*
+            kv should look like
+            key: recordID (15-18digit sf id)
+            value: [
+                {
+                    integerValue:,
+                    dollarValue:,
+                    dateValue,
+                }, ...
+            ]
+        */
+        //not good, make a callout
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint('https://cdg-cache-faux-data-endpoint.herokuapp.com/getFauxProductData?maxQuantity=5');
+        req.setMethod('GET');
+
+        Http h = new Http();
+        HttpResponse resp = h.send(req);
+        List<fauxRecord> fr = new List<fauxRecord>();
+        
+        fr = (List<fauxRecord>)JSON.deserializeStrict(resp.getBody(), List<fauxRecord>.class);
+        
+        //push content into cache
+        Cache.Org.put(targetRecordID, fr);
+        return fr;
     }
 }

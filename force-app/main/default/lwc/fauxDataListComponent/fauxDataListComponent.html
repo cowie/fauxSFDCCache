@@ -1,5 +1,5 @@
 <template>
-    <div class="slds-card  slds-card_boundary">
+    <div class="slds-card slds-card_boundary">
         <div class="slds-page-header forceRelatedListCardHeader">
             <div class="slds-page-header__row">
                 <div class="slds-page-header__col-title">
@@ -18,6 +18,9 @@
                                     </a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="slds-no-flex">
+                            <lightning-button label="Refresh Data" onclick={requestForcedRefresh}></lightning-button>
                         </div>
                     </div>
                 </div>
